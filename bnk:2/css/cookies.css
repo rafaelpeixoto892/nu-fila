@@ -1,0 +1,349 @@
+.cookies {
+    display: none;
+    bottom: 0;
+    background: #fafa30;
+    padding: 37px 0 42px;
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
+  }
+  .cookies .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  @media only screen and (max-width: 468px) {
+    .cookies .container {
+      flex-direction: column;
+    }
+  }
+  @media only screen and (max-width: 765px) {
+    .cookies .container {
+      display: block;
+    }
+  }
+  .cookies h2 {
+    color: #576dff;
+    font-size: 18px;
+    font-family: "BancoDoBrasilTitulos-Regular";
+    font-weight: 500;
+    line-height: 18px;
+    margin-bottom: 11px;
+    letter-spacing: 0.5px;
+  }
+  .cookies p {
+    color: #404040;
+    font-size: 14px;
+    line-height: 16px;
+    margin: 0;
+  }
+  .cookies p a {
+    color: #576dff;
+    text-decoration: underline;
+  }
+  .cookies p a:hover {
+    text-decoration: none;
+  }
+  .cookies .cookies-disclaimer {
+    align-items: center;
+    display: flex;
+  }
+  .cookies .cookies-disclaimer p {
+    margin: 0;
+  }
+  @media only screen and (max-width: 468px) {
+    .cookies .cookies-disclaimer p {
+      margin-bottom: 15px;
+    }
+  }
+  .cookies .actions {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+  }
+  @media only screen and (max-width: 769px) {
+    .cookies .actions {
+      justify-content: center;
+      margin-top: 15px;
+    }
+  }
+  @media only screen and (max-width: 375px) {
+    .cookies .actions {
+      flex-direction: column;
+      margin-top: 5px;
+    }
+    .cookies .actions .accept_cookie {
+      width: 100%;
+      margin-right: 0;
+      margin-top: 10px;
+    }
+    .cookies .actions .settings_cookie {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+  .cookies .accept_cookie {
+    background: #576dff;
+    border: 1px solid #576dff;
+    color: #fafa30;
+    font-family: "BancoDoBrasilTitulos-Regular";
+    font-size: 16px;
+    padding: 10px 32px;
+    text-align: center;
+    transition: 0.3s all;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 900;
+    font-size: 17px;
+  }
+  .cookies .accept_cookie:hover, .cookies .accept_cookie.active {
+    background: #fafa30;
+    color: #576dff;
+    text-decoration: none;
+  }
+  .cookies .settings_cookie {
+    background: #fafa30;
+    border: 1px solid #576dff;
+    color: #576dff;
+    font-family: "BancoDoBrasilTitulos-Regular";
+    font-size: 16px;
+    padding: 10px 32px;
+    text-align: center;
+    transition: 0.3s all;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 900;
+    padding: 10px 20px !important;
+    font-size: 17px;
+    margin-right: 15px;
+  }
+  .cookies .settings_cookie:hover, .cookies .settings_cookie.active {
+    background: #576dff;
+    color: #fafa30;
+    text-decoration: none;
+  }
+  
+  .overlay-cookie {
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 999999;
+  }
+  .overlay-cookie .dialog-cookie {
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    max-height: 100%;
+    overflow: auto;
+  }
+  @media only screen and (max-width: 1040px) {
+    .overlay-cookie .dialog-cookie {
+      width: 80%;
+    }
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie {
+      top: 52%;
+      width: 90%;
+    }
+  }
+  .overlay-cookie .dialog-cookie .description {
+    background: #576dff;
+    padding: 40px 41px;
+  }
+  .overlay-cookie .dialog-cookie .description > div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .description > div {
+      margin-bottom: 10px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .description > div h3 {
+    align-items: center;
+    display: flex;
+  }
+  .overlay-cookie .dialog-cookie .description > div h3 span {
+    color: #fafa30;
+    display: block;
+    font-family: "BancoDoBrasilTitulos-Regular";
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 26px;
+    padding-left: 18px;
+  }
+  .overlay-cookie .dialog-cookie .description > div a {
+    background: none;
+    border: none;
+    color: #fafa30;
+    font-size: 29px;
+    outline: none;
+    text-decoration: none;
+    transition: 0.3s all;
+  }
+  .overlay-cookie .dialog-cookie .description > div a:hover {
+    color: #ffffff;
+  }
+  .overlay-cookie .dialog-cookie .description p {
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 18px;
+    margin-bottom: 20px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .description p {
+      margin-bottom: 10px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .description p a {
+    color: #fafa30;
+  }
+  .overlay-cookie .dialog-cookie .options {
+    align-items: flex-start;
+    background: #fafa30;
+    display: flex;
+    padding: 40px 41px;
+  }
+  .overlay-cookie .dialog-cookie .options #bar {
+    background: #ffffff;
+    border-radius: 3px;
+    height: 243px;
+    position: relative;
+    width: 10px;
+    cursor: pointer;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options #bar {
+      height: 288px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options #bar:before {
+    background: #576dff;
+    border-radius: 6px;
+    bottom: 0;
+    content: "";
+    display: block;
+    position: absolute;
+    width: 6px;
+    left: 1.8px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options #bar:before {
+      left: 1.8px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options #bar.opt1:before {
+    height: 63px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options #bar.opt1:before {
+      height: 53px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options #bar.opt1 .bullet {
+    top: 180px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options #bar.opt1 .bullet {
+      top: 230px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options #bar.opt2:before {
+    height: 152px;
+  }
+  .overlay-cookie .dialog-cookie .options #bar.opt2 .bullet {
+    top: 90px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options #bar.opt2 .bullet {
+      top: 127px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options #bar.opt3:before {
+    height: 100%;
+  }
+  .overlay-cookie .dialog-cookie .options #bar.opt3 .bullet {
+    top: 0;
+  }
+  .overlay-cookie .dialog-cookie .options #bar .bullet {
+    background: #576dff;
+    border-radius: 50%;
+    display: block;
+    height: 16px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, 0);
+    top: 0;
+    width: 16px;
+  }
+  .overlay-cookie .dialog-cookie .options #bar .bullet:before {
+    background: #fafa30;
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: 6px;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    width: 6px;
+  }
+  .overlay-cookie .dialog-cookie .options .itens {
+    margin-left: 15px;
+    width: 100%;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options .itens {
+      padding-bottom: 20px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options h3 {
+    color: #576dff;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: "BancoDoBrasilTitulos-Regular";
+    font-weight: 600;
+    line-height: 21px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  .overlay-cookie .dialog-cookie .options p {
+    color: #404040;
+    font-size: 14px;
+  }
+  @media only screen and (max-width: 468px) {
+    .overlay-cookie .dialog-cookie .options p {
+      margin-bottom: 10px;
+    }
+  }
+  .overlay-cookie .dialog-cookie .options .submit {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  .overlay-cookie .dialog-cookie .options .submit .settings {
+    background: #576dff;
+    border: 1px solid #576dff;
+    color: #fafa30;
+    font-family: "BancoDoBrasilTitulos-Regular";
+    font-size: 16px;
+    padding: 10px 32px;
+    text-align: center;
+    transition: 0.3s all;
+    text-decoration: none;
+    border-radius: 6px;
+  }
+  .overlay-cookie .dialog-cookie .options .submit .settings:hover, .overlay-cookie .dialog-cookie .options .submit .settings.active {
+    background: #fafa30;
+    color: #576dff;
+    text-decoration: none;
+  }
